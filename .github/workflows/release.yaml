@@ -1,0 +1,91 @@
+name: Docker Image CI
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Infiscal
+        run: |
+          curl -1sLf 'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' | sudo -E bash
+          sudo apt-get update && sudo apt-get install -y infisical
+
+      - name: Generate Infiscal Token
+        id: infisical
+        run: |
+          echo "TOKEN=$(infisical login \
+            --method=universal-auth \
+            --client-id=${{ secrets.INFISICAL_CLIENT_ID }} \
+            --client-secret=${{ secrets.INFISICAL_CLIENT_SECRET }} \
+            --silent \
+            --plain
+          )" >> $GITHUB_OUTPUT
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Github Packages
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image and push to Registry
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64
+          no-cache: true
+          tags: |
+            ghcr.io/overal-x/api.formatio:latest
+            ghcr.io/overal-x/api.formatio:${{ github.ref_name }}
+          build-args: |
+            infisical_token=${{ steps.infisical.outputs.TOKEN }}
+            infisical_project_id=${{ secrets.INFISICAL_PROJECT_ID }}
+            infisical_env=${{ secrets.INFISICAL_ENV }}
+            aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          push: true
+
+  test:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate Prisma client
+        run: go run github.com/steebchen/prisma-client-go generate
+
+      - name: Install Dependencies
+        run: go mod tidy
+
+      - name: Run unit tests
+        run: go test ./services -v
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+
+    steps:
+      - name: Trigger Rollout in Cluster
+        run: |
+          LATEST_TAG=${{ github.ref_name }}
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.GH_TRIGGER_TOKEN }}" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/overal-x/infra.formatio/dispatches \
+          -d "{\"event_type\":\"api.formatio\",\"client_payload\":{\"passed\": true, \"tag_name\": \"$LATEST_TAG\"}}"

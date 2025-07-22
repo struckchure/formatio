@@ -1,0 +1,275 @@
+generator db {
+  provider = "go run github.com/steebchen/prisma-client-go"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Currency {
+  NGN @map("NGN")
+
+  @@map("currency")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  firstName String?  @map("first_name")
+  lastName  String?  @map("last_name")
+  email     String?  @unique
+  password  String?
+  roles     String[]
+
+  Card                    Card[]
+  GithubAccountConnection GithubAccountConnection[]
+  Invoice                 Invoice[]
+  Machine                 Machine[]
+  SocialConnection        SocialConnection[]
+  Transaction             Transaction[]
+
+  @@map("users")
+}
+
+model Card {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  userId      String  @map("user_id")
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isDefault   Boolean @default(false) @map("is_default")
+  cardType    String? @map("card_type")
+  lastDigits  String? @map("last_digits")
+  authToken   String? @map("auth_token")
+  isApproved  Boolean @default(false) @map("is_approved")
+  expiryMonth String? @map("expiry_month")
+  expiryYear  String? @map("expiry_year")
+
+  @@map("cards")
+}
+
+model DeploymentLog {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  deploymentId String     @map("deployment_id")
+  deployment   Deployment @relation(fields: [deploymentId], references: [id], onDelete: Cascade)
+  jobId        String?    @map("job_id")
+  message      String?
+
+  @@map("deployment_logs")
+}
+
+enum DeploymentStatus {
+  IDLE        @map("IDLE")
+  IN_PROGRESS @map("IN_PROGRESS")
+  SUCCESSFUL  @map("SUCCESSFUL")
+  FAILED      @map("FAILED")
+
+  @@map("deployment_status")
+}
+
+model Deployment {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  machineId        String           @map("machine_id")
+  machine          Machine          @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  repoConnectionId String           @map("repo_connection_id")
+  repoConnection   RepoConnection   @relation(fields: [repoConnectionId], references: [id], onDelete: Cascade)
+  commitHash       String?          @map("commit_hash")
+  commitMessage    String?          @map("commit_message")
+  actor            String?
+  status           DeploymentStatus @default(IDLE)
+
+  DeploymentLog DeploymentLog[]
+
+  @@map("deployments")
+}
+
+model GithubAccountConnection {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  userId               String  @map("user_id")
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  githubId             String? @map("github_id")
+  githubInstallationId Int?    @map("github_installation_id")
+  githubUsername       String? @map("github_username")
+  githubEmail          String? @map("github_email")
+
+  @@map("github_account_connections")
+}
+
+enum InvoiceStatus {
+  PAID   @map("PAID")
+  UNPAID @map("UNPAID")
+
+  @@map("invoice_status")
+}
+
+model Invoice {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  userId      String        @map("user_id")
+  user        User          @relation(fields: [userId], references: [id], onUpdate: NoAction)
+  productId   String?       @map("product_id")
+  reference   String?
+  description String?
+  from        DateTime?     @db.Timestamptz(6)
+  to          DateTime?     @db.Timestamptz(6)
+  quantity    Int?
+  unitPrice   Decimal       @map("unit_price") @db.Money
+  totalPrice  Decimal       @map("total_price") @db.Money
+  currency    Currency      @default(NGN)
+  status      InvoiceStatus @default(UNPAID)
+
+  @@map("invoices")
+}
+
+model MachinePlan {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  name        String?  @unique
+  currency    Currency @default(NGN)
+  monthlyRate Decimal? @map("monthly_rate") @db.Money
+  hourlyRate  Decimal? @map("hourly_rate") @db.Money
+  cpu         String
+  memory      String
+
+  Machine Machine[]
+
+  @@map("machine_plans")
+}
+
+enum MachineStatus {
+  CREATING      @map("CREATING")
+  RUNNING       @map("RUNNING")
+  REBOOTING     @map("REBOOTING")
+  SHUTTING_DOWN @map("SHUTTING_DOWN")
+  SHUTDOWN      @map("SHUTDOWN")
+
+  @@map("machine_status")
+}
+
+model Machine {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  ownerId       String        @map("owner_id")
+  owner         User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  planId        String        @map("plan_id")
+  plan          MachinePlan   @relation(fields: [planId], references: [id], onDelete: NoAction, onUpdate: Cascade)
+  containerId   String?       @map("container_id")
+  machineName   String?       @map("machine_name")
+  machineImage  String?       @map("machine_image")
+  machineStatus MachineStatus @default(CREATING) @map("machine_status")
+
+  Deployment     Deployment[]
+  Network        Network[]
+  RepoConnection RepoConnection[]
+
+  @@unique([ownerId, machineName])
+  @@map("machines")
+}
+
+model Network {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  machineId       String  @map("machine_id")
+  machine         Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  hostName        String? @map("host_name")
+  protocol        String?
+  listeningPort   Int     @map("listening_port")
+  destinationPort Int     @map("destination_port")
+  serviceId       String? @map("service_id")
+  ingressId       String? @map("ingress_id")
+
+  @@map("networks")
+}
+
+model RepoConnection {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  machineId String  @map("machine_id")
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  repoId    String? @map("repo_id")
+  repoName  String?
+
+  Deployment Deployment[]
+
+  @@map("repo_connections")
+}
+
+model SocialConnection {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  userId         String  @map("user_id")
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  connectionId   String? @map("connection_id")
+  connectionType String? @map("connection_type")
+
+  @@map("social_connections")
+}
+
+enum TransactionStatus {
+  PENDING @map("PENDING")
+  SUCCESS @map("SUCCESS")
+  FAILED  @map("FAILED")
+
+  @@map("transaction_status")
+}
+
+enum TransactionType {
+  DEBIT  @map("DEBIT")
+  CREDIT @map("CREDIT")
+
+  @@map("transaction_type")
+}
+
+model Transaction {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @default(dbgenerated("null")) @map("deleted_at")
+
+  userId      String            @map("user_id")
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount      Decimal           @db.Money
+  currency    Currency          @default(NGN)
+  status      TransactionStatus
+  type        TransactionType
+  reference   String            @unique
+  description String?
+
+  @@map("transactions")
+}

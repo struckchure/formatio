@@ -1,0 +1,28 @@
+version: "3"
+
+tasks:
+  dev:
+    cmd: go run .
+
+  prod:
+    cmds:
+      - go build -o ./main
+      - chmod +x ./main
+      - ./main
+
+  db:make-migrations:
+    cmds:
+      - go run github.com/steebchen/prisma-client-go migrate dev --name x
+      - go run github.com/steebchen/prisma-client-go generate
+
+  db:apply-migrations:
+    cmd: go run github.com/steebchen/prisma-client-go migrate deploy
+
+  db:generate:
+    cmd: go run github.com/steebchen/prisma-client-go generate
+
+  test:
+    cmd: go test ./services -v
+
+  doc:generate:
+    cmd: swag init --pd=true -ot=go,yaml --requiredByDefault=true

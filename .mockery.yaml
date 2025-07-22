@@ -1,0 +1,25 @@
+quiet: False
+keeptree: False
+disable-version-string: True
+with-expecter: False
+mockname: "Mock{{.InterfaceName}}"
+all: True
+packages:
+  pkg.formatio/dao:
+    config:
+      recursive: True
+      dir: "mocks/{{.PackageName}}"
+      outpkg: mocks
+      inpackage: False
+  pkg.formatio/services:
+    config:
+      recursive: True
+      dir: "mocks/{{.PackageName}}"
+      outpkg: mocks
+      inpackage: False
+  pkg.formatio/lib:
+    config:
+      recursive: True
+      dir: "mocks/{{.PackageName}}"
+      outpkg: mocks
+      inpackage: False

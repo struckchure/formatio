@@ -1,0 +1,14 @@
+.vscode/*
+!.vscode/launch.json
+
+/tmp
+*.DS_Store
+
+.kube
+__debug*
+
+.env
+.env.*
+!.env.sample
+
+.infisical.json

@@ -1,0 +1,28 @@
+name: Basic App Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  - build:
+    steps:
+      - name: Build App
+        run: echo "build app ..."
+
+  - test:
+    steps:
+      - name: Test App
+        run: echo "testing app ..."
+
+  - deploy:
+    steps:
+      - name: Deploy App
+        run: echo "deploying app ..."
+
+  - release:
+    steps:
+      - name: Release App
+        run: echo "releasing app ..."
