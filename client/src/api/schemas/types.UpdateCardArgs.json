@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "AuthToken": { "type": "string" },
+    "CardType": { "type": "string" },
+    "ExpiryMonth": { "type": "string" },
+    "ExpiryYear": { "type": "string" },
+    "IsApproved": { "type": "boolean" },
+    "IsDefault": { "type": "boolean" },
+    "LastDigits": { "type": "string" }
+  },
+  "x-readme-ref-name": "types.UpdateCardArgs"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "string",
+  "enum": ["PAID", "UNPAID"],
+  "x-enum-varnames": ["InvoiceStatusPaid", "InvoiceStatusUnpaid"],
+  "x-readme-ref-name": "db.InvoiceStatus"
+}

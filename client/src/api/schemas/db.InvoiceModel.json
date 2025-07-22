@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "properties": {
+    "createdAt": { "type": "string" },
+    "currency": {
+      "type": "string",
+      "enum": ["NGN"],
+      "x-enum-varnames": ["CurrencyNgn"],
+      "x-readme-ref-name": "db.Currency"
+    },
+    "deletedAt": { "type": "string" },
+    "description": { "type": "string" },
+    "from": { "type": "string" },
+    "id": { "type": "string" },
+    "productId": { "type": "string" },
+    "quantity": { "type": "integer" },
+    "reference": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["PAID", "UNPAID"],
+      "x-enum-varnames": ["InvoiceStatusPaid", "InvoiceStatusUnpaid"],
+      "x-readme-ref-name": "db.InvoiceStatus"
+    },
+    "to": { "type": "string" },
+    "totalPrice": { "type": "number" },
+    "unitPrice": { "type": "number" },
+    "updatedAt": { "type": "string" },
+    "user": { "$ref": "#/components/schemas/db.UserModel" },
+    "userId": { "type": "string" }
+  },
+  "required": [
+    "createdAt",
+    "currency",
+    "deletedAt",
+    "description",
+    "from",
+    "id",
+    "productId",
+    "quantity",
+    "reference",
+    "status",
+    "to",
+    "totalPrice",
+    "unitPrice",
+    "updatedAt",
+    "user",
+    "userId"
+  ],
+  "x-readme-ref-name": "db.InvoiceModel"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "machineImage": { "type": "string" },
+    "machineName": { "type": "string" },
+    "planId": { "type": "string" }
+  },
+  "required": ["machineImage", "machineName", "planId"],
+  "x-readme-ref-name": "types.CreateMachineArgs"
+}

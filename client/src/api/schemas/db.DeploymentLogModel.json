@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "deployment": { "$ref": "#/components/schemas/db.DeploymentModel" },
+    "deploymentId": { "type": "string" },
+    "id": { "type": "string" },
+    "jobId": { "type": "string" },
+    "message": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "createdAt",
+    "deletedAt",
+    "deployment",
+    "deploymentId",
+    "id",
+    "jobId",
+    "message",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.DeploymentLogModel"
+}

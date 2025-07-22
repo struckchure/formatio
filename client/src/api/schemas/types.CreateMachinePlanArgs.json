@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "cpu": { "type": "string" },
+    "currency": { "type": "string" },
+    "memory": { "type": "string" },
+    "monthlyRate": { "type": "integer" },
+    "name": { "type": "string" }
+  },
+  "required": ["cpu", "currency", "memory", "monthlyRate", "name"],
+  "x-readme-ref-name": "types.CreateMachinePlanArgs"
+}

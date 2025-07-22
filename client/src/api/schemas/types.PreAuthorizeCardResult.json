@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "properties": { "reference": { "type": "string" } },
+  "required": ["reference"],
+  "x-readme-ref-name": "types.PreAuthorizeCardResult"
+}

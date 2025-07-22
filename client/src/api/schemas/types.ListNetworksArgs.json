@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "machineId": { "type": "string" },
+    "search": { "type": "string" },
+    "skip": { "type": "integer" },
+    "sortBy": { "type": "string" },
+    "take": { "type": "integer" }
+  },
+  "x-readme-ref-name": "types.ListNetworksArgs"
+}

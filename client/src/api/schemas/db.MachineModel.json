@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "Deployment": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.DeploymentModel" }
+    },
+    "Network": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.NetworkModel" }
+    },
+    "RepoConnection": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.RepoConnectionModel" }
+    },
+    "containerId": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "id": { "type": "string" },
+    "machineImage": { "type": "string" },
+    "machineName": { "type": "string" },
+    "machineStatus": {
+      "type": "string",
+      "enum": ["CREATING", "RUNNING", "REBOOTING", "SHUTTING_DOWN", "SHUTDOWN"],
+      "x-enum-varnames": [
+        "MachineStatusCreating",
+        "MachineStatusRunning",
+        "MachineStatusRebooting",
+        "MachineStatusShuttingDown",
+        "MachineStatusShutdown"
+      ],
+      "x-readme-ref-name": "db.MachineStatus"
+    },
+    "owner": { "$ref": "#/components/schemas/db.UserModel" },
+    "ownerId": { "type": "string" },
+    "plan": { "$ref": "#/components/schemas/db.MachinePlanModel" },
+    "planId": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "Deployment",
+    "Network",
+    "RepoConnection",
+    "containerId",
+    "createdAt",
+    "deletedAt",
+    "id",
+    "machineImage",
+    "machineName",
+    "machineStatus",
+    "owner",
+    "ownerId",
+    "plan",
+    "planId",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.MachineModel"
+}

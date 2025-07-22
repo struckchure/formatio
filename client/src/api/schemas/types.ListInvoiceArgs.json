@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "search": { "type": "string" },
+    "skip": { "type": "integer" },
+    "sortBy": { "type": "string" },
+    "take": { "type": "integer" },
+    "userId": { "type": "string" }
+  },
+  "x-readme-ref-name": "types.ListInvoiceArgs"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "machineId": { "type": "string" },
+    "repoId": { "type": "string" },
+    "repoName": { "type": "string" }
+  },
+  "required": ["machineId", "repoId", "repoName"],
+  "x-readme-ref-name": "types.CreateRepoConnectionArgs"
+}

@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": ["IDLE", "IN_PROGRESS", "SUCCESSFUL", "FAILED"],
+  "x-enum-varnames": [
+    "DeploymentStatusIdle",
+    "DeploymentStatusInProgress",
+    "DeploymentStatusSuccessful",
+    "DeploymentStatusFailed"
+  ],
+  "x-readme-ref-name": "db.DeploymentStatus"
+}

@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "destinationPort": { "type": "integer" },
+    "hostName": { "type": "string" },
+    "id": { "type": "string" },
+    "ingressId": { "type": "string" },
+    "listeningPort": { "type": "integer" },
+    "machine": { "$ref": "#/components/schemas/db.MachineModel" },
+    "machineId": { "type": "string" },
+    "protocol": { "type": "string" },
+    "serviceId": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "createdAt",
+    "deletedAt",
+    "destinationPort",
+    "hostName",
+    "id",
+    "ingressId",
+    "listeningPort",
+    "machine",
+    "machineId",
+    "protocol",
+    "serviceId",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.NetworkModel"
+}

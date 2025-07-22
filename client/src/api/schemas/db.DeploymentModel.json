@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "DeploymentLog": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.DeploymentLogModel" }
+    },
+    "actor": { "type": "string" },
+    "commitHash": { "type": "string" },
+    "commitMessage": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "id": { "type": "string" },
+    "machine": { "$ref": "#/components/schemas/db.MachineModel" },
+    "machineId": { "type": "string" },
+    "repoConnection": { "$ref": "#/components/schemas/db.RepoConnectionModel" },
+    "repoConnectionId": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["IDLE", "IN_PROGRESS", "SUCCESSFUL", "FAILED"],
+      "x-enum-varnames": [
+        "DeploymentStatusIdle",
+        "DeploymentStatusInProgress",
+        "DeploymentStatusSuccessful",
+        "DeploymentStatusFailed"
+      ],
+      "x-readme-ref-name": "db.DeploymentStatus"
+    },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "DeploymentLog",
+    "actor",
+    "commitHash",
+    "commitMessage",
+    "createdAt",
+    "deletedAt",
+    "id",
+    "machine",
+    "machineId",
+    "repoConnection",
+    "repoConnectionId",
+    "status",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.DeploymentModel"
+}

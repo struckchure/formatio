@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "properties": { "refreshToken": { "type": "string" } },
+  "required": ["refreshToken"],
+  "x-readme-ref-name": "types.RefreshAccessTokenArgs"
+}

@@ -1,0 +1,9 @@
+@use "variables";
+
+.auth-background {
+  background-color: variables.$primary-color;
+  background-image: url("../images/auth-bg-2.svg"), url("../images/auth-bg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

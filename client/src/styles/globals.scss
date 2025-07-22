@@ -1,0 +1,36 @@
+@use "auth";
+@use "homepage";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .center {
+    @apply justify-center place-items-center;
+  }
+
+  .flex-center {
+    @apply flex center;
+  }
+
+  .flex-col-center {
+    @apply flex-col flex center;
+  }
+
+  .flex-between-center {
+    @apply justify-between flex items-center;
+  }
+
+  .default-transition {
+    @apply transition duration-500 ease-in-out;
+  }
+}
+
+.debug {
+  border: 1px solid red;
+}
+
+input {
+  @apply bg-primary text-white p-2 rounded-md border-[1px] border-secondary;
+}

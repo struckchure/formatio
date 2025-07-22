@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "machineId": { "type": "string" },
+    "repoId": { "type": "string" },
+    "repoName": { "type": "string" }
+  },
+  "x-readme-ref-name": "types.UpdateRepoConnectionArgs"
+}

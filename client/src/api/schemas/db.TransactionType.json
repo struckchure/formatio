@@ -1,0 +1,6 @@
+{
+  "type": "string",
+  "enum": ["DEBIT", "CREDIT"],
+  "x-enum-varnames": ["TransactionTypeDebit", "TransactionTypeCredit"],
+  "x-readme-ref-name": "db.TransactionType"
+}

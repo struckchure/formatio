@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "destinationPort": { "type": "integer" },
+    "listeningPort": { "type": "integer" },
+    "machineId": { "type": "string" },
+    "protocol": { "type": "string" }
+  },
+  "required": ["destinationPort", "listeningPort", "machineId", "protocol"],
+  "x-readme-ref-name": "types.CreateNetworkArgs"
+}

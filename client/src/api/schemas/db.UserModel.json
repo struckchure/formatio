@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "Card": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.CardModel" }
+    },
+    "GithubAccountConnection": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/db.GithubAccountConnectionModel"
+      }
+    },
+    "Invoice": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.InvoiceModel" }
+    },
+    "Machine": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.MachineModel" }
+    },
+    "SocialConnection": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.SocialConnectionModel" }
+    },
+    "Transaction": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.TransactionModel" }
+    },
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "email": { "type": "string" },
+    "firstName": { "type": "string" },
+    "id": { "type": "string" },
+    "lastName": { "type": "string" },
+    "password": { "type": "string" },
+    "roles": { "type": "array", "items": { "type": "string" } },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "Card",
+    "GithubAccountConnection",
+    "Invoice",
+    "Machine",
+    "SocialConnection",
+    "Transaction",
+    "createdAt",
+    "deletedAt",
+    "email",
+    "firstName",
+    "id",
+    "lastName",
+    "password",
+    "roles",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.UserModel"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "enum": ["CREATING", "RUNNING", "REBOOTING", "SHUTTING_DOWN", "SHUTDOWN"],
+  "x-enum-varnames": [
+    "MachineStatusCreating",
+    "MachineStatusRunning",
+    "MachineStatusRebooting",
+    "MachineStatusShuttingDown",
+    "MachineStatusShutdown"
+  ],
+  "x-readme-ref-name": "db.MachineStatus"
+}

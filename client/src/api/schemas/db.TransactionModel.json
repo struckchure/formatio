@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "amount": { "type": "number" },
+    "createdAt": { "type": "string" },
+    "currency": {
+      "type": "string",
+      "enum": ["NGN"],
+      "x-enum-varnames": ["CurrencyNgn"],
+      "x-readme-ref-name": "db.Currency"
+    },
+    "deletedAt": { "type": "string" },
+    "description": { "type": "string" },
+    "id": { "type": "string" },
+    "reference": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "SUCCESS", "FAILED"],
+      "x-enum-varnames": [
+        "TransactionStatusPending",
+        "TransactionStatusSuccess",
+        "TransactionStatusFailed"
+      ],
+      "x-readme-ref-name": "db.TransactionStatus"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["DEBIT", "CREDIT"],
+      "x-enum-varnames": ["TransactionTypeDebit", "TransactionTypeCredit"],
+      "x-readme-ref-name": "db.TransactionType"
+    },
+    "updatedAt": { "type": "string" },
+    "user": { "$ref": "#/components/schemas/db.UserModel" },
+    "userId": { "type": "string" }
+  },
+  "required": [
+    "amount",
+    "createdAt",
+    "currency",
+    "deletedAt",
+    "description",
+    "id",
+    "reference",
+    "status",
+    "type",
+    "updatedAt",
+    "user",
+    "userId"
+  ],
+  "x-readme-ref-name": "db.TransactionModel"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "properties": { "link": { "type": "string" } },
+  "required": ["link"],
+  "x-readme-ref-name": "handlers.RedirectResult"
+}

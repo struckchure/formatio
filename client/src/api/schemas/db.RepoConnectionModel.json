@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "Deployment": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.DeploymentModel" }
+    },
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "id": { "type": "string" },
+    "machine": { "$ref": "#/components/schemas/db.MachineModel" },
+    "machineId": { "type": "string" },
+    "repoId": { "type": "string" },
+    "repoName": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "Deployment",
+    "createdAt",
+    "deletedAt",
+    "id",
+    "machine",
+    "machineId",
+    "repoId",
+    "repoName",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.RepoConnectionModel"
+}

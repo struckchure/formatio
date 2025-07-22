@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "Machine": {
+      "type": "array",
+      "items": { "$ref": "#/components/schemas/db.MachineModel" }
+    },
+    "cpu": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "currency": {
+      "type": "string",
+      "enum": ["NGN"],
+      "x-enum-varnames": ["CurrencyNgn"],
+      "x-readme-ref-name": "db.Currency"
+    },
+    "deletedAt": { "type": "string" },
+    "hourlyRate": { "type": "number" },
+    "id": { "type": "string" },
+    "memory": { "type": "string" },
+    "monthlyRate": { "type": "number" },
+    "name": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "required": [
+    "Machine",
+    "cpu",
+    "createdAt",
+    "currency",
+    "deletedAt",
+    "hourlyRate",
+    "id",
+    "memory",
+    "monthlyRate",
+    "name",
+    "updatedAt"
+  ],
+  "x-readme-ref-name": "db.MachinePlanModel"
+}

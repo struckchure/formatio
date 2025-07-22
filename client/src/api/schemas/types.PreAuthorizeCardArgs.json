@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "cardNumber": { "type": "string" },
+    "cvv": { "type": "string" },
+    "expiryMonth": { "type": "string" },
+    "expiryYear": { "type": "string" },
+    "pin": { "type": "string" }
+  },
+  "required": ["cardNumber", "cvv", "expiryMonth", "expiryYear", "pin"],
+  "x-readme-ref-name": "types.PreAuthorizeCardArgs"
+}

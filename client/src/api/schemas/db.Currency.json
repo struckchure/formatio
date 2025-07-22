@@ -1,0 +1,6 @@
+{
+  "type": "string",
+  "enum": ["NGN"],
+  "x-enum-varnames": ["CurrencyNgn"],
+  "x-readme-ref-name": "db.Currency"
+}

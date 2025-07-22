@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "connectionId": { "type": "string" },
+    "ref": { "type": "string" }
+  },
+  "required": ["connectionId", "ref"],
+  "x-readme-ref-name": "services.DeployRepoArgs"
+}

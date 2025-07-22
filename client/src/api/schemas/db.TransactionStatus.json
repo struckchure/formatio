@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "enum": ["PENDING", "SUCCESS", "FAILED"],
+  "x-enum-varnames": [
+    "TransactionStatusPending",
+    "TransactionStatusSuccess",
+    "TransactionStatusFailed"
+  ],
+  "x-readme-ref-name": "db.TransactionStatus"
+}

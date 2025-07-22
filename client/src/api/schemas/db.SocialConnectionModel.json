@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "connectionId": { "type": "string" },
+    "connectionType": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "id": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "user": { "$ref": "#/components/schemas/db.UserModel" },
+    "userId": { "type": "string" }
+  },
+  "required": [
+    "connectionId",
+    "connectionType",
+    "createdAt",
+    "deletedAt",
+    "id",
+    "updatedAt",
+    "user",
+    "userId"
+  ],
+  "x-readme-ref-name": "db.SocialConnectionModel"
+}

@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "createdAt": { "type": "string" },
+    "deletedAt": { "type": "string" },
+    "githubEmail": { "type": "string" },
+    "githubId": { "type": "string" },
+    "githubInstallationId": { "type": "integer" },
+    "githubUsername": { "type": "string" },
+    "id": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "user": { "$ref": "#/components/schemas/db.UserModel" },
+    "userId": { "type": "string" }
+  },
+  "required": [
+    "createdAt",
+    "deletedAt",
+    "githubEmail",
+    "githubId",
+    "githubInstallationId",
+    "githubUsername",
+    "id",
+    "updatedAt",
+    "user",
+    "userId"
+  ],
+  "x-readme-ref-name": "db.GithubAccountConnectionModel"
+}

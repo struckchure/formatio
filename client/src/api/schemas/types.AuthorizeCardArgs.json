@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "otp": { "type": "string" },
+    "reference": { "type": "string" }
+  },
+  "required": ["otp", "reference"],
+  "x-readme-ref-name": "types.AuthorizeCardArgs"
+}
