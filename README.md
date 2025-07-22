@@ -174,7 +174,7 @@ This interface allows you to explore all available API endpoints, their expected
 👋 Hi there! I built this project to deepen my understanding of cloud infrastructure, distributed systems, and modern web development practices. If you have any questions or want to connect, feel free to reach out!
 
 *   **Email**: [ameenmohammed2311@gmail.com](mailto:ameenmohammed2311@gmail.com)
-*   **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/struckchure)
+*   **LinkedIn**: [Mohammed Al-Ameen](https://linkedin.com/in/struckchure)
 *   **Twitter**: [@struckchure](https://twitter.com/struckchure)
 
 ---
